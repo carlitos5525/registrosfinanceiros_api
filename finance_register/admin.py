@@ -1,3 +1,6 @@
 from django.contrib import admin
+from finance_register.models import Register, Ammount
 
-# Register your models here.
+
+admin.site.register(Register)
+admin.site.register(Ammount)
