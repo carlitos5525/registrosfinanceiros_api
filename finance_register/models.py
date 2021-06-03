@@ -51,7 +51,7 @@ class Ammount(models.Model):
     type = models.CharField(max_length=2, blank=True, null=True, choices=TYPE_CHOICES)
     finance_register = models.ForeignKey(Register, on_delete=models.CASCADE)
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
-    cost_center_id = models.ForeignKey(CostCenter, on_delete=models.SET_NULL, null=True)
+    cost_center_id = models.ForeignKey(CostCenter, on_delete=models.SET_NULL, null=True, blank=True)
 
 
     class Meta:
