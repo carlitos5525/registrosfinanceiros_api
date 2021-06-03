@@ -9,6 +9,9 @@ class Company(models.Model):
     class Meta:
         verbose_name = 'Empresa'
         verbose_name_plural = 'Empresas'
+    
+    def __str__(self):
+        return self.name
 
 
 class BankAccount(models.Model):
@@ -18,7 +21,11 @@ class BankAccount(models.Model):
     agency_number = models.CharField(max_length=10)
     account_number = models.CharField(max_length=12)
     account_digit = models.CharField(max_length=1)
+    company_id = models.ForeignKey(Company, on_delete=models.CASCADE, default=1)
 
     class Meta:
         verbose_name = "Conta Bancária"
         verbose_name_plural = "Contas Bancárias"
+    
+    def __str__(self):
+        return self.account_number

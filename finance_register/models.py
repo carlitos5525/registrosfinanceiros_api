@@ -36,6 +36,8 @@ class Register(models.Model):
         verbose_name = 'Registro'
         verbose_name_plural = 'Registros'
 
+    def __str__(self):
+        return self.name
 
 class Ammount(models.Model):
     TYPE_CHOICES = (
@@ -54,3 +56,6 @@ class Ammount(models.Model):
     class Meta:
         verbose_name = 'Lançamento'
         verbose_name_plural = 'Lançamentos'
+
+    def __str__(self):
+        return self.name
