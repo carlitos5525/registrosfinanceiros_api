@@ -47,6 +47,7 @@ class Ammount(models.Model):
 
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     name = models.CharField(max_length=250, blank=True, null=True)
+    value = models.FloatField(default=0.0)
     type = models.CharField(max_length=2, blank=True, null=True, choices=TYPE_CHOICES)
     finance_register = models.ForeignKey(Register, on_delete=models.CASCADE)
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
