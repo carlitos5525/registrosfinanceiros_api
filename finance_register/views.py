@@ -26,3 +26,15 @@ class RegisterViewSet(ModelViewSet):
         ammount_serialized = AmmountSerializer(ammount)
         json = JSONRenderer().render(ammount_serialized.data)
         return HttpResponse(json)
+
+    @action(methods=['post'], detail=True)
+    def create_ammount(self, request, pk):
+        ammount_data = request.data
+        register = Register.objects.get(id=pk)
+        ammount_data['company_id'] = register.company_id
+        ammount = Ammount.objects.create(**ammount_data)
+        register.ammounts.add(ammount)
+        register_serialized = RegisterSerializer(register)
+        json = JSONRenderer().render(register_serialized.data)
+        return HttpResponse(json)
+
