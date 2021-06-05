@@ -1,11 +1,10 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from finance_register.models import Ammount, Register
-from finance_register.serializers import RegisterSerializer
+from finance_register.serializers import RegisterSerializer, AmmountSerializer
 from rest_framework.decorators import action
 from django.http import HttpResponse
-
-
+from rest_framework.renderers import JSONRenderer
 
 
 class RegisterViewSet(ModelViewSet):
@@ -23,6 +22,7 @@ class RegisterViewSet(ModelViewSet):
         ammount = Ammount.objects.get(id=ammount_id)
         for attr, value in ammount_data.items():
             setattr(ammount, attr, value)
-        print(ammount.value)
         ammount.save()
-        return HttpResponse('OK')
+        ammount_serialized = AmmountSerializer(ammount)
+        json = JSONRenderer().render(ammount_serialized.data)
+        return HttpResponse(json)
