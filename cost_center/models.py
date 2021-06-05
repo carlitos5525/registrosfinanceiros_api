@@ -12,3 +12,5 @@ class CostCenter(models.Model):
         verbose_name = 'Centro de Custo'
         verbose_name_plural = 'Centros de Custo'
     
+    def __str__(self):
+        return self.name

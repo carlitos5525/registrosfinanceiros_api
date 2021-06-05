@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'company',
     'cost_center',
     'finance_register',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
