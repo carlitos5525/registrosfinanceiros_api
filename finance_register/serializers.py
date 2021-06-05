@@ -8,7 +8,7 @@ from finance_register.models import Ammount
 class AmmountSerializer(ModelSerializer):
     class Meta:
         model = Ammount
-        fields = ('name', 'value', 'type', 'cost_center_id')
+        fields = ('id', 'name', 'value', 'type', 'cost_center_id')
 
 class RegisterSerializer(ModelSerializer):
     ammounts = AmmountSerializer(many=True)
@@ -28,5 +28,13 @@ class RegisterSerializer(ModelSerializer):
         del validated_data['ammounts']
         register = Register.objects.create(**validated_data)
         self.create_ammount(ammounts, register)
+        register.save()
+        return register
+
+    def update(self, instance, validated_data):
+        register = instance
+        del validated_data['ammounts']
+        for attr, value in validated_data.items():
+            setattr(register, attr, value)
         register.save()
         return register
