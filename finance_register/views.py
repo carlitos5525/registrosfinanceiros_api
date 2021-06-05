@@ -19,15 +19,20 @@ class RegisterViewSet(ModelViewSet):
     def update_ammount(self, request, pk):
         ammount_data = request.data['ammount']
         register = Register.objects.get(id=pk)
+        register_ammounts = register.ammounts.all()
         ammount_id = ammount_data['id']
-        ammount = Ammount.objects.get(id=ammount_id)
-        for attr, value in ammount_data.items():
-            setattr(ammount, attr, value)
-        ammount.save()
-        register_serialized = RegisterSerializer(register)
-        json = JSONRenderer().render(register_serialized.data)
-        return HttpResponse(json)
-
+        ammount = get_object_or_404(Ammount, id=ammount_id)
+        if ammount in register_ammounts:
+            for attr, value in ammount_data.items():
+                setattr(ammount, attr, value)
+            ammount.save()
+            register_serialized = RegisterSerializer(register)
+            json = JSONRenderer().render(register_serialized.data)
+            return HttpResponse(json)
+        else:
+            response = HttpResponse('The ammount is not related to the finance register')
+            response.status_code = 404
+            return response
     @action(methods=['post'], detail=True)
     def create_ammount(self, request, pk):
         ammount_data = request.data
