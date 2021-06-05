@@ -7,7 +7,7 @@ from rest_framework import routers
 app_name='finance_register'
 
 router = routers.DefaultRouter()
-router.register(r'', views.RegisterViewSet)
+router.register(r'', views.RegisterViewSet, basename='Register')
 urlpatterns = [
     path('', include(router.urls)),
 ]
