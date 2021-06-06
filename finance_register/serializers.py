@@ -4,6 +4,7 @@ from rest_framework.serializers import Serializer, ModelSerializer
 from finance_register.models import Register
 from finance_register.models import Ammount
 from cost_center.serializers import CostCenterSerializer
+from company.serializers import BankAccountSerializer
 
 
 class AmmountSerializer(ModelSerializer):
@@ -15,6 +16,7 @@ class AmmountSerializer(ModelSerializer):
 
 class RegisterSerializer(ModelSerializer):
     ammounts = AmmountSerializer(many=True)
+    bank_account = BankAccountSerializer()
 
     class Meta:
         model = Register
