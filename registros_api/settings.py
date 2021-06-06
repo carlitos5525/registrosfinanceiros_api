@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'cost_center',
     'finance_register',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [

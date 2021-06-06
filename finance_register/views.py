@@ -6,10 +6,14 @@ from rest_framework.decorators import action
 from django.http import HttpResponse, Http404, response
 from rest_framework.renderers import JSONRenderer
 from django.shortcuts import render, get_object_or_404
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 
 
 class RegisterViewSet(ModelViewSet):
     serializer_class = RegisterSerializer
+    permission_classes = (IsAuthenticated, )
+    authentication_classes = (TokenAuthentication, )
 
     def get_queryset(self):
         query = Register.objects.all()
