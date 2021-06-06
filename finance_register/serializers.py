@@ -3,9 +3,12 @@ from rest_framework import serializers
 from rest_framework.serializers import Serializer, ModelSerializer
 from finance_register.models import Register
 from finance_register.models import Ammount
+from cost_center.serializers import CostCenterSerializer
 
 
 class AmmountSerializer(ModelSerializer):
+    cost_center_id = CostCenterSerializer()
+
     class Meta:
         model = Ammount
         fields = ('id', 'name', 'value', 'type', 'cost_center_id')
