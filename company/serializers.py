@@ -13,4 +13,4 @@ class CompanySerializer(ModelSerializer):
     
     class Meta:
         model = Company
-        fields = '__all__'
+        fields = ('id', 'name', 'bank_accounts')
