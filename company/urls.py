@@ -10,7 +10,7 @@ router = routers.DefaultRouter()
 router.register(r'', CompanyViewSet, basename='Company')
 
 bank_router = routers.NestedDefaultRouter(
-    router, r'', lookup="id"
+    router, r'', lookup="company"
 )
 bank_router.register(
     r"bank_accounts", BankAccountViewSet, basename='Company'
