@@ -11,9 +11,10 @@ class BankAccountSerializer(ModelSerializer):
 
 
 class CompanySerializer(ModelSerializer):
+    bank_accounts = BankAccountSerializer(many=True)
     class Meta:
         model = Company
-        fields = '__all__'
+        fields = ('id', 'name', 'bank_accounts')
 
 
 class UserSerializer(ModelSerializer):

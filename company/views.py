@@ -46,4 +46,9 @@ class CompanyViewSet(ModelViewSet):
 
 class UserProfileViewSet(ModelViewSet):
     serializer_class = UserProfileSerializer
-    queryset = UserProfile.objects.all()
+    
+    def get_queryset(self):
+        print(self.kwargs)
+        company_id = self.kwargs["company_pk"]
+        query = UserProfile.objects.filter(company=company_id)
+        return query
