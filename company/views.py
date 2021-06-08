@@ -1,10 +1,10 @@
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from company.serializers import BankAccountSerializer, CompanySerializer
+from company.serializers import BankAccountSerializer, CompanySerializer, UserProfileSerializer, UserSerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from company.models import BankAccount, Company
+from company.models import BankAccount, Company, UserProfile
 from rest_framework.decorators import action
 from django.shortcuts import get_object_or_404
 from rest_framework.renderers import JSONRenderer
@@ -36,4 +36,8 @@ class BankAccountViewSet(ModelViewSet):
 class CompanyViewSet(ModelViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
-    http_method_names = ['post', 'put', 'delete']
+
+
+class UserProfileViewSet(ModelViewSet):
+    serializer_class = UserProfileSerializer
+    queryset = UserProfile.objects.all()

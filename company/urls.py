@@ -1,5 +1,5 @@
 from django.urls import path, include
-from company.views import CompanyViewSet, BankAccountViewSet
+from company.views import CompanyViewSet, BankAccountViewSet, UserProfileViewSet
 from rest_framework import routers
 from rest_framework_nested import routers
 
@@ -16,7 +16,11 @@ company_router.register(
     r"bank_accounts", BankAccountViewSet, basename='Company'
 )
 
+company_router.register(
+    r'users', UserProfileViewSet, basename='UserProfile'
+)
+
 urlpatterns = [
     path('', include(router.urls)),
-    path('',include(company_router.urls))
+    path('',include(company_router.urls)),
 ]
