@@ -37,7 +37,6 @@ class RegisterViewSet(ModelViewSet):
             response = HttpResponse('The ammount is not related to the finance register')
             response.status_code = 404
             return response
-
     @action(methods=['post'], detail=True)
     def create_ammount(self, request, pk):
         ammount_data = request.data
