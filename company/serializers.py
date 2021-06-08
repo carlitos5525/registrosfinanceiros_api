@@ -27,3 +27,10 @@ class UserProfileSerializer(ModelSerializer):
     class Meta:
         model = UserProfile
         fields = ('user', 'company')
+
+    def create(self, validated_data):
+        user = validated_data['user']
+        company_id = validated_data['company']
+        created_user = User.objects.create(**user)
+        user_profile = UserProfile.objects.create(user=created_user, company=company_id)
+        return user_profile
