@@ -1,5 +1,6 @@
 from django.http.response import JsonResponse
 from django.shortcuts import render
+from rest_framework.exceptions import MethodNotAllowed
 from rest_framework.viewsets import ModelViewSet
 from company.serializers import BankAccountSerializer, CompanySerializer, UserProfileSerializer, UserSerializer
 from rest_framework.authentication import TokenAuthentication
@@ -36,6 +37,11 @@ class BankAccountViewSet(ModelViewSet):
 class CompanyViewSet(ModelViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
+
+    def list(self, request, *args, **kwargs):
+        response = HttpResponse()
+        response.status_code = 405
+        return response
 
 
 class UserProfileViewSet(ModelViewSet):
