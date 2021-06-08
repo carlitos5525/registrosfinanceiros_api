@@ -13,6 +13,8 @@ from django.http import HttpResponse
 
 class BankAccountViewSet(ModelViewSet):
     serializer_class = BankAccountSerializer
+    permission_classes = (IsAuthenticated, )
+    authentication_classes = (TokenAuthentication, )
 
     def get_queryset(self):
         print(self.kwargs)

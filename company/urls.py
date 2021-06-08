@@ -9,14 +9,14 @@ app_name='company'
 router = routers.DefaultRouter()
 router.register(r'', CompanyViewSet, basename='Company')
 
-bank_router = routers.NestedDefaultRouter(
+company_router = routers.NestedDefaultRouter(
     router, r'', lookup="company"
 )
-bank_router.register(
+company_router.register(
     r"bank_accounts", BankAccountViewSet, basename='Company'
 )
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('',include(bank_router.urls))
+    path('',include(company_router.urls))
 ]
