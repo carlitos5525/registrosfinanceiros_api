@@ -8,6 +8,7 @@ from rest_framework.renderers import JSONRenderer
 from django.shortcuts import render, get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
+from company.models import UserProfile
 
 
 class AmmountViewSet(ModelViewSet):
@@ -39,5 +40,8 @@ class RegisterViewSet(ModelViewSet):
     authentication_classes = (TokenAuthentication, )
 
     def get_queryset(self):
-        query = Register.objects.all()
+        user = self.request.user
+        user_profile = UserProfile.objects.get(user=user)
+        company_id = user_profile.company
+        query = Register.objects.filter(company_id=company_id)
         return query

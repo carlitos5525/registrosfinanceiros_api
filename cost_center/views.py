@@ -4,6 +4,7 @@ from cost_center.serializers import CostCenterSerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from cost_center.models import CostCenter
+from company.models import UserProfile
 
 
 class CostCenterViewSet(ModelViewSet):
@@ -12,5 +13,9 @@ class CostCenterViewSet(ModelViewSet):
     authentication_classes = (TokenAuthentication,)
 
     def get_queryset(self):
-        query = CostCenter.objects.all()
+        user = self.request.user
+        user_profile = UserProfile.objects.get(user=user)
+        company_id = user_profile.company
+        query = CostCenter.objects.filter(company_id=company_id)
+        return query
         return query
