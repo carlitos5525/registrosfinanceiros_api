@@ -22,7 +22,7 @@ class BankAccount(models.Model):
 class Company(models.Model):
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     name = models.CharField(max_length=250)
-    bank_accounts = models.ManyToManyField(BankAccount)
+    bank_accounts = models.ManyToManyField(BankAccount, blank=True)
 
     class Meta:
         verbose_name = 'Empresa'
