@@ -11,7 +11,6 @@ class BankAccountSerializer(ModelSerializer):
 
 
 class CompanySerializer(ModelSerializer):
-    bank_accounts = BankAccountSerializer(many=True)
     class Meta:
         model = Company
         fields = ('id', 'name', 'bank_accounts')
@@ -20,7 +19,7 @@ class CompanySerializer(ModelSerializer):
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', )
+        fields = ('username', "password" )
 
 
 class UserProfileSerializer(ModelSerializer):
@@ -31,7 +30,8 @@ class UserProfileSerializer(ModelSerializer):
 
     def create(self, validated_data):
         user = validated_data['user']
+        print(user)
         company_id = validated_data['company']
-        created_user = User.objects.create(**user)
+        created_user = User.objects.create_user(**user)
         user_profile = UserProfile.objects.create(user=created_user, company=company_id)
         return user_profile

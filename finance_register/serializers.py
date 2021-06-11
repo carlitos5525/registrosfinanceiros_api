@@ -8,19 +8,18 @@ from company.serializers import BankAccountSerializer
 
 
 class AmmountSerializer(ModelSerializer):
-    cost_center_id = CostCenterSerializer()
-
     class Meta:
         model = Ammount
         fields = ('id', 'name', 'value', 'type', 'cost_center_id')
 
+
 class RegisterSerializer(ModelSerializer):
     ammounts = AmmountSerializer(many=True)
-    bank_account = BankAccountSerializer()
 
     class Meta:
         model = Register
-        fields ='__all__'
+        fields = ('id', 'name', 'company_id', 'due_date', 'pay_date', 
+                  'status', 'payment_method', 'bank_account', 'ammounts')
 
     def create_ammount(self, ammounts, register):
         for ammount in ammounts:
